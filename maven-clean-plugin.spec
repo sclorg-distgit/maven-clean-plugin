@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.5
-Release:        8.10%{?dist}
+Release:        8.11%{?dist}
 Summary:        Maven Clean Plugin
 
 License:        ASL 2.0
@@ -14,9 +14,9 @@ Source0:        http://repo1.maven.org/maven2/org/apache/maven/plugins/%{pkg_nam
 BuildArch: noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-mvn(org.apache.maven.plugins:maven-plugins:pom:)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-plugin-api)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-utils)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugins:maven-plugins:pom:)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-utils)
 
 
 %description
@@ -32,7 +32,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # maven-core has scope "provided" in Plugin Testing Harness, so we
 # need to provide it or tests will fail to compile.  This works for
@@ -42,13 +42,13 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -62,6 +62,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.5-8.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2.5-8.10
 - maven33 rebuild
 
