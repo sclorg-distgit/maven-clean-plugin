@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.5
-Release:        8.11%{?dist}
+Release:        8.12%{?dist}
 Summary:        Maven Clean Plugin
 
 License:        ASL 2.0
@@ -13,7 +13,7 @@ Source0:        http://repo1.maven.org/maven2/org/apache/maven/plugins/%{pkg_nam
 
 BuildArch: noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugins:maven-plugins:pom:)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
 BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-utils)
@@ -62,6 +62,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2.5-8.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.5-8.11
 - maven33 rebuild #2
 
